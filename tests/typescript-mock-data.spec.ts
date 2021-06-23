@@ -81,6 +81,16 @@ it('should generate mock data functions with external types file import', async 
     expect(result).toMatchSnapshot();
 });
 
+it('should generate mock data functions with external types file import and typesPrefix', async () => {
+    const result = await plugin(testSchema, [], { typesFile: './types/graphql.ts', typesPrefix: 'I' });
+
+    expect(result).toBeDefined();
+    expect(result).toContain(
+        "import { IAbcType, IAvatar, IUpdateUserInput, IUser, IAbcStatus, IStatus } from './types/graphql';",
+    );
+    expect(result).toMatchSnapshot();
+});
+
 it('should generate mock data with typename if addTypename is true', async () => {
     const result = await plugin(testSchema, [], { addTypename: true });
 
@@ -240,10 +250,10 @@ it('should correctly use custom generator as default value', async () => {
 });
 
 it('should add typesPrefix to all types when option is specified', async () => {
-    const result = await plugin(testSchema, [], { typesPrefix: 'Api.' });
+    const result = await plugin(testSchema, [], { typesPrefix: 'I' });
 
     expect(result).toBeDefined();
-    expect(result).toMatch(/: Api.User/);
+    expect(result).toMatch(/: IUser/);
     expect(result).not.toMatch(/: User/);
     expect(result).toMatchSnapshot();
 });
