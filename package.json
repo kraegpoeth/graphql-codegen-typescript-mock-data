@@ -57,7 +57,6 @@
     },
     "sideEffects": false,
     "scripts": {
-        "prepare": "yarn run build",
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
         "test": "TZ=UTC jest",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit",
@@ -76,7 +75,9 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": [
+                "lint-staged && yarn run build && git update-index --add dist/"
+            ]
         }
     },
     "files": [
