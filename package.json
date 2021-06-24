@@ -57,14 +57,14 @@
     },
     "sideEffects": false,
     "scripts": {
+        "prepare": "yarn run build",
         "build": "tsc -m esnext --outDir dist/esnext && tsc -m commonjs --outDir dist/commonjs",
         "test": "TZ=UTC jest",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit",
         "prettify": "prettier --config ./.prettierrc.js --write",
         "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",
         "auto:publish": "yarn publish && git push --follow-tags --set-upstream origin $CIRCLE_BRANCH",
-        "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release",
-        "prepare": "yarn run build"
+        "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release"
     },
     "lint-staged": {
         "*.{js,ts,tsx}": [
