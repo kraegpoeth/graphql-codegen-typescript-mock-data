@@ -63,7 +63,8 @@
         "prettify": "prettier --config ./.prettierrc.js --write",
         "auto:version": "yarn version --`auto version` --message 'Bump version to: %s [skip ci]'",
         "auto:publish": "yarn publish && git push --follow-tags --set-upstream origin $CIRCLE_BRANCH",
-        "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release"
+        "release": "auto changelog && yarn auto:version && yarn auto:publish && auto release",
+        "prepare": "yarn run build"
     },
     "lint-staged": {
         "*.{js,ts,tsx}": [
